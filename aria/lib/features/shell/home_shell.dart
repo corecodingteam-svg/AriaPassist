@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-/// Bottom navigation: Today · (Mic) · Lists.
+/// Bottom navigation: Today · (Mic) · Lists, on the Neon navigation colour.
 class HomeShell extends ConsumerWidget {
   const HomeShell({required this.navigationShell, super.key});
 
@@ -38,7 +38,7 @@ class HomeShell extends ConsumerWidget {
         child: MicButton(onPressed: () => _openTalkSheet(context)),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: p.surface,
+        color: p.navColor,
         height: 72,
         padding: EdgeInsets.zero,
         shape: const CircularNotchedRectangle(),
@@ -85,7 +85,7 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final p = context.palette;
-    final color = selected ? p.primary : p.muted;
+    final color = selected ? p.onNav : p.navMuted;
     return Expanded(
       child: Semantics(
         selected: selected,
@@ -96,7 +96,17 @@ class _NavItem extends StatelessWidget {
           onTap: onTap,
           // Grows with large text; label scaling is capped like Material's
           // own navigation bar so four tabs still fit.
-          child: ConstrainedBox(
+          // Neon marks the active item with a bar; weight and colour say it too.
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: selected ? p.onNav : Colors.transparent,
+                  width: 3,
+                ),
+              ),
+            ),
+            child: ConstrainedBox(
             constraints: const BoxConstraints(minHeight: 72),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -118,6 +128,7 @@ class _NavItem extends StatelessWidget {
                 ),
               ],
             ),
+          ),
           ),
         ),
       ),

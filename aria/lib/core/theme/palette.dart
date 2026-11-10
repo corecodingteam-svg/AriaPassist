@@ -14,6 +14,7 @@ class AriaPalette {
     required this.surface,
     required this.text,
     required this.muted,
+    this.nav,
     this.success = const Color(0xFF22B07D),
     this.warning = const Color(0xFFF5A524),
     this.danger = const Color(0xFFEF4F6B),
@@ -25,11 +26,28 @@ class AriaPalette {
   final Color surface;
   final Color text;
   final Color muted;
+
+  /// The Neon navigation bar (Neon's sidebar colour); [primary] when not set.
+  final Color? nav;
   final Color success;
   final Color warning;
   final Color danger;
 
   bool get isDark => background.computeLuminance() < 0.2;
+
+  Color get navColor => nav ?? primary;
+
+  /// Titles and the selected item on [navColor].
+  Color get onNav => readableOn(navColor, dark: const Color(0xFF1A1E24));
+
+  /// Unselected navigation items: [onNav] softened, the way Neon's sidebar greys its links, but kept at AA.
+  Color get navMuted {
+    for (final a in const [0.72, 0.8, 0.88]) {
+      final c = Color.alphaBlend(onNav.withValues(alpha: a), navColor);
+      if (contrastRatio(c, navColor) >= kAaNormalText) return c;
+    }
+    return onNav;
+  }
 
   /// Text/icon colour on top of [primary] (buttons, mic).
   Color get onPrimary => _on(primary);
@@ -51,6 +69,7 @@ class AriaPalette {
         surface: surface,
         text: text ?? this.text,
         muted: muted ?? this.muted,
+        nav: nav,
         success: success,
         warning: warning,
         danger: danger,

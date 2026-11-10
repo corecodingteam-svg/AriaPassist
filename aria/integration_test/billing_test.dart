@@ -221,7 +221,7 @@ void main() {
       );
       expect(await plan(), 'free');
       expect(container.read(voiceSettingsProvider).voiceId, 'aria');
-      expect(container.read(themeControllerProvider).presetId, 'lavender');
+      expect(container.read(themeControllerProvider).presetId, 'neon');
 
       final history = await api.history(circleId);
       expect(

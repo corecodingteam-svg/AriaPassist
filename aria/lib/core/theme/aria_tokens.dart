@@ -14,10 +14,10 @@ class AriaTokens extends ThemeExtension<AriaTokens> {
   /// Standard animation duration; `Duration.zero` when reduce-motion is on.
   final Duration motion;
 
-  // Radii (spec: 16–20 for cards).
-  static const double radiusSm = 12;
-  static const double radiusMd = 16;
-  static const double radiusLg = 20;
+  // Radii: the Neon look's squared-off panels, buttons and inputs.
+  static const double radiusSm = 3;
+  static const double radiusMd = 3;
+  static const double radiusLg = 4;
   static const double radiusPill = 999;
 
   // Spacing scale.
@@ -58,6 +58,7 @@ class AriaTokens extends ThemeExtension<AriaTokens> {
         surface: Color.lerp(a.surface, b.surface, t)!,
         text: Color.lerp(a.text, b.text, t)!,
         muted: Color.lerp(a.muted, b.muted, t)!,
+        nav: Color.lerp(a.navColor, b.navColor, t),
         success: Color.lerp(a.success, b.success, t)!,
         warning: Color.lerp(a.warning, b.warning, t)!,
         danger: Color.lerp(a.danger, b.danger, t)!,

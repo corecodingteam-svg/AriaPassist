@@ -187,7 +187,7 @@ abstract final class PlanCatalog {
         ..._common,
         'voices': ['aria', 'device'],
         'max_lists': 2,
-        'themes': ['lavender', 'ocean', 'mint'],
+        'themes': ['neon', 'lavender', 'ocean', 'mint'],
       },
     ),
     Plan(

@@ -25,3 +25,14 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  # Noto Sans, the Neon look's typeface (SIL Open Font License: assets/fonts/NotoSans-OFL.txt).
+  fonts:
+    - family: NotoSans
+      fonts:
+        - asset: assets/fonts/NotoSans-400.ttf
+        - asset: assets/fonts/NotoSans-500.ttf
+          weight: 500
+        - asset: assets/fonts/NotoSans-600.ttf
+          weight: 600
+        - asset: assets/fonts/NotoSans-700.ttf
+          weight: 700

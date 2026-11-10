@@ -459,6 +459,7 @@ const kHindi = <String, String>{
   'Name': 'नाम',
   'Needed to leave Simple Mode': 'सिंपल मोड से बाहर आने के लिए ज़रूरी',
   'Needs motion access — coming later': 'मोशन की अनुमति चाहिए — बाद में आएगा',
+  'Neon': 'नियॉन',
   'New': 'नया',
   'New list': 'नई लिस्ट',
   'New note': 'नया नोट',

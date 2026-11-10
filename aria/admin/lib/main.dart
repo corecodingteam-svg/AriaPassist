@@ -1,4 +1,5 @@
 import 'package:aria_admin/core/env.dart';
+import 'package:aria_admin/core/neon_theme.dart';
 import 'package:aria_admin/core/providers.dart';
 import 'package:aria_admin/core/router.dart';
 import 'package:aria_admin/data/admin_api.dart';
@@ -37,16 +38,8 @@ Future<void> main() async {
   );
 }
 
-ThemeData adminTheme(Brightness b) => ThemeData(
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: const Color(0xFF7848FF),
-    brightness: b,
-  ),
-  cardTheme: const CardThemeData(margin: EdgeInsets.zero),
-  inputDecorationTheme: const InputDecorationTheme(
-    border: OutlineInputBorder(),
-  ),
-);
+/// The Neon look (see core/neon_theme.dart).
+ThemeData adminTheme(Brightness b) => neonTheme(b);
 
 class AdminApp extends ConsumerWidget {
   const AdminApp({super.key});

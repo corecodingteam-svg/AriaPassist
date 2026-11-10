@@ -19,188 +19,251 @@ class ThemePreset {
   final AriaPalette light;
   final AriaPalette dark;
 
-  /// Free plan gets 3 presets; the rest are premium (Phase 7 enforces).
+  /// Free plan gets the free presets; the rest are premium (Phase 7 enforces).
   final bool isFree;
 }
 
-/// Ids must match `public.theme_presets.id` in Supabase.
+/// The Neon look: Neon (dark slate with a blue accent) and its skins. [AriaPalette.nav] is the skin's header and
+/// navigation colour; [AriaPalette.primary] is the same hue made dark (or, in dark mode, light) enough for buttons
+/// and links to keep AA contrast, which Neon's bright greens, yellows and blues would not.
+///
+/// Ids must match `public.theme_presets.id` in Supabase; the existing ids keep their names so plans and saved
+/// choices still apply.
+/// Neon's danger red: white text on it passes AA, which the default red does not with these lighter text colours.
+/// Dark palettes keep the default red, which reads better as error text on dark panels.
+const _neonDanger = Color(0xFFCC2424);
+
 abstract final class ThemePresets {
+  static const neon = ThemePreset(
+    id: 'neon',
+    label: 'Neon',
+    isFree: true,
+    light: AriaPalette(
+      primary: Color(0xFF303641),
+      secondary: Color(0xFF21A9E1),
+      background: Color(0xFFF3F3F3),
+      surface: Color(0xFFFFFFFF),
+      text: Color(0xFF2B303A),
+      muted: Color(0xFF5F6570),
+      nav: Color(0xFF303641),
+      danger: _neonDanger,
+    ),
+    dark: AriaPalette(
+      primary: Color(0xFF5CC0EA),
+      secondary: Color(0xFF8FD3F0),
+      background: Color(0xFF1A1E24),
+      surface: Color(0xFF262B33),
+      text: Color(0xFFECEEF1),
+      muted: Color(0xFFA8ADB5),
+      nav: Color(0xFF303641),
+    ),
+  );
+
+  /// Neon's Purple skin.
   static const lavender = ThemePreset(
     id: 'lavender',
     label: 'Lavender',
     isFree: true,
     light: AriaPalette(
-      // Darkened from #7C4DFF so text buttons pass AA (≥4.5:1) on the background.
-      primary: Color(0xFF7848FF),
-      secondary: Color(0xFFFF6FAE),
-      background: Color(0xFFF7F3FC),
+      primary: Color(0xFF643590),
+      secondary: Color(0xFFBA79CB),
+      background: Color(0xFFF3F3F3),
       surface: Color(0xFFFFFFFF),
-      text: Color(0xFF1F1633),
-      // Spec #7A7090 is 4.2:1 on the background; darkened to pass AA.
-      muted: Color(0xFF6E6487),
+      text: Color(0xFF2B2433),
+      muted: Color(0xFF635C6C),
+      nav: Color(0xFF522B76),
+      danger: _neonDanger,
     ),
     dark: AriaPalette(
-      primary: Color(0xFFB39DFF),
-      secondary: Color(0xFFFF8DC0),
-      background: Color(0xFF15111F),
-      surface: Color(0xFF211B2E),
-      text: Color(0xFFF3EEFB),
-      muted: Color(0xFFABA1C2),
+      primary: Color(0xFFCFA8EE),
+      secondary: Color(0xFFE0BDF0),
+      background: Color(0xFF1C1822),
+      surface: Color(0xFF29232F),
+      text: Color(0xFFF1EDF5),
+      muted: Color(0xFFB1A8BB),
+      nav: Color(0xFF522B76),
     ),
   );
 
+  /// Neon's Blue skin.
   static const ocean = ThemePreset(
     id: 'ocean',
     label: 'Ocean Blue',
     isFree: true,
     light: AriaPalette(
-      // Darkened from #1E6FD9 so text buttons pass AA (≥4.5:1) on the background.
-      primary: Color(0xFF1E6DD6),
-      secondary: Color(0xFF00B3C7),
-      background: Color(0xFFF2F7FD),
+      primary: Color(0xFF063D7D),
+      secondary: Color(0xFF21A9E1),
+      background: Color(0xFFF3F3F3),
       surface: Color(0xFFFFFFFF),
-      text: Color(0xFF0F1C2E),
-      muted: Color(0xFF56667B),
+      text: Color(0xFF13243A),
+      muted: Color(0xFF56657A),
+      nav: Color(0xFF003471),
+      danger: _neonDanger,
     ),
     dark: AriaPalette(
-      primary: Color(0xFF7FB2FF),
-      secondary: Color(0xFF4FD8E8),
-      background: Color(0xFF0D1520),
-      surface: Color(0xFF172231),
-      text: Color(0xFFEAF2FC),
-      muted: Color(0xFF9FB0C4),
+      primary: Color(0xFF86B9F2),
+      secondary: Color(0xFF8FD3F0),
+      background: Color(0xFF111A26),
+      surface: Color(0xFF1B2635),
+      text: Color(0xFFEAF1FA),
+      muted: Color(0xFFA2B1C4),
+      nav: Color(0xFF003471),
     ),
   );
 
+  /// Neon's Green skin (the bar a little deeper than Neon's #00A651 so its white text passes AA).
   static const mint = ThemePreset(
     id: 'mint',
     label: 'Mint Green',
     isFree: true,
     light: AriaPalette(
-      primary: Color(0xFF0F7F60),
-      secondary: Color(0xFF7BD389),
-      background: Color(0xFFF1FAF6),
+      primary: Color(0xFF00733A),
+      secondary: Color(0xFF00A651),
+      background: Color(0xFFF3F3F3),
       surface: Color(0xFFFFFFFF),
-      text: Color(0xFF10241D),
-      muted: Color(0xFF4F6A63),
+      text: Color(0xFF122A1D),
+      muted: Color(0xFF526459),
+      nav: Color(0xFF00843F),
+      danger: _neonDanger,
     ),
     dark: AriaPalette(
-      primary: Color(0xFF5FD3AE),
-      secondary: Color(0xFFA5E8B0),
-      background: Color(0xFF0C1714),
-      surface: Color(0xFF15241F),
-      text: Color(0xFFE6F6F0),
-      muted: Color(0xFF9DB8B0),
+      primary: Color(0xFF5FD39A),
+      secondary: Color(0xFF8FE3B8),
+      background: Color(0xFF0F1A14),
+      surface: Color(0xFF18261E),
+      text: Color(0xFFE7F5ED),
+      muted: Color(0xFF9FB7A9),
+      nav: Color(0xFF00843F),
     ),
   );
 
+  /// Neon's orange stat tile as a skin.
   static const sunset = ThemePreset(
     id: 'sunset',
     label: 'Sunset Orange',
     light: AriaPalette(
-      primary: Color(0xFFC2410C),
-      secondary: Color(0xFFFFB347),
-      background: Color(0xFFFFF6EF),
+      primary: Color(0xFFA8530A),
+      secondary: Color(0xFFFFA812),
+      background: Color(0xFFF3F3F3),
       surface: Color(0xFFFFFFFF),
-      text: Color(0xFF2A160C),
-      muted: Color(0xFF74594C),
+      text: Color(0xFF2E1C0C),
+      muted: Color(0xFF6E5B4B),
+      nav: Color(0xFFF89D00),
+      danger: _neonDanger,
     ),
     dark: AriaPalette(
-      primary: Color(0xFFFF9A5C),
-      secondary: Color(0xFFFFC978),
-      background: Color(0xFF1A110C),
-      surface: Color(0xFF271A13),
-      text: Color(0xFFFBEDE4),
-      muted: Color(0xFFC2A799),
+      primary: Color(0xFFFFB35C),
+      secondary: Color(0xFFFFC97A),
+      background: Color(0xFF1C140C),
+      surface: Color(0xFF2A1F14),
+      text: Color(0xFFFBEFE2),
+      muted: Color(0xFFC4AB95),
+      nav: Color(0xFFF89D00),
     ),
   );
 
+  /// Neon's Red skin.
   static const rose = ThemePreset(
     id: 'rose',
     label: 'Rose Pink',
     light: AriaPalette(
-      primary: Color(0xFFC2185B),
-      secondary: Color(0xFFFF8FB1),
-      background: Color(0xFFFFF3F7),
+      primary: Color(0xFFA22424),
+      secondary: Color(0xFFF56954),
+      background: Color(0xFFF3F3F3),
       surface: Color(0xFFFFFFFF),
-      text: Color(0xFF2B0F1C),
-      muted: Color(0xFF775564),
+      text: Color(0xFF2E1414),
+      muted: Color(0xFF6C5656),
+      nav: Color(0xFF981B1B),
+      danger: _neonDanger,
     ),
     dark: AriaPalette(
-      primary: Color(0xFFFF8FB8),
-      secondary: Color(0xFFFFB3CB),
-      background: Color(0xFF1B0E14),
-      surface: Color(0xFF2A1720),
-      text: Color(0xFFFBE9F0),
-      muted: Color(0xFFC4A2B1),
+      primary: Color(0xFFFF9488),
+      secondary: Color(0xFFFFB3A8),
+      background: Color(0xFF1D1212),
+      surface: Color(0xFF2B1B1B),
+      text: Color(0xFFFBECEC),
+      muted: Color(0xFFC4A6A6),
+      nav: Color(0xFF981B1B),
     ),
   );
 
+  /// Neon's Black skin.
   static const midnight = ThemePreset(
     id: 'midnight',
     label: 'Midnight',
     light: AriaPalette(
-      // Darkened from #3D5AFE so text buttons pass AA (≥4.5:1) on the background.
-      primary: Color(0xFF3A58FE),
-      secondary: Color(0xFF00B8D4),
-      background: Color(0xFFEEF0F8),
+      primary: Color(0xFF222222),
+      secondary: Color(0xFF21A9E1),
+      background: Color(0xFFF3F3F3),
       surface: Color(0xFFFFFFFF),
-      text: Color(0xFF0E1330),
-      muted: Color(0xFF555B7B),
+      text: Color(0xFF1F1F1F),
+      muted: Color(0xFF5C5C5C),
+      nav: Color(0xFF222222),
+      danger: _neonDanger,
     ),
     dark: AriaPalette(
-      primary: Color(0xFF8C9EFF),
-      secondary: Color(0xFF5CE1F5),
-      background: Color(0xFF0A0D1C),
-      surface: Color(0xFF141A30),
-      text: Color(0xFFE8EBFA),
-      muted: Color(0xFFA3A9C8),
+      primary: Color(0xFF7CC8EE),
+      secondary: Color(0xFFA6DBF5),
+      background: Color(0xFF141414),
+      surface: Color(0xFF1F1F1F),
+      text: Color(0xFFF0F0F0),
+      muted: Color(0xFFA9A9A9),
+      nav: Color(0xFF222222),
     ),
   );
 
+  /// Neon's Cafe skin.
   static const sand = ThemePreset(
     id: 'sand',
     label: 'Sand',
     light: AriaPalette(
-      primary: Color(0xFF8A5A2B),
-      secondary: Color(0xFFD9A55B),
-      background: Color(0xFFFBF7F0),
+      primary: Color(0xFF5B4632),
+      secondary: Color(0xFFA5876B),
+      background: Color(0xFFFBF1DF),
       surface: Color(0xFFFFFFFF),
       text: Color(0xFF2B2116),
-      muted: Color(0xFF6F604A),
+      muted: Color(0xFF6A5A48),
+      nav: Color(0xFF31271E),
+      danger: _neonDanger,
     ),
     dark: AriaPalette(
-      primary: Color(0xFFE0B784),
-      secondary: Color(0xFFEBC98F),
-      background: Color(0xFF17130D),
-      surface: Color(0xFF241E16),
-      text: Color(0xFFF5EDE1),
-      muted: Color(0xFFBFB09A),
+      primary: Color(0xFFE3C6A2),
+      secondary: Color(0xFFEAD3B5),
+      background: Color(0xFF19140F),
+      surface: Color(0xFF262019),
+      text: Color(0xFFF6EEE3),
+      muted: Color(0xFFBFB09C),
+      nav: Color(0xFF31271E),
     ),
   );
 
+  /// Neon's White skin.
   static const monochrome = ThemePreset(
     id: 'monochrome',
     label: 'Monochrome',
     light: AriaPalette(
-      primary: Color(0xFF2B2B2B),
-      secondary: Color(0xFF6B6B6B),
-      background: Color(0xFFF5F5F5),
+      primary: Color(0xFF51555D),
+      secondary: Color(0xFF8A8F97),
+      background: Color(0xFFF3F3F3),
       surface: Color(0xFFFFFFFF),
-      text: Color(0xFF111111),
-      muted: Color(0xFF5B5B5B),
+      text: Color(0xFF26282C),
+      muted: Color(0xFF5B5F66),
+      nav: Color(0xFFFFFFFF),
+      danger: _neonDanger,
     ),
     dark: AriaPalette(
       primary: Color(0xFFE6E6E6),
-      secondary: Color(0xFFB0B0B0),
-      background: Color(0xFF0F0F0F),
-      surface: Color(0xFF1C1C1C),
+      secondary: Color(0xFFBDBDBD),
+      background: Color(0xFF121212),
+      surface: Color(0xFF1E1E1E),
       text: Color(0xFFF2F2F2),
       muted: Color(0xFFA8A8A8),
+      nav: Color(0xFF303030),
     ),
   );
 
   static const all = <ThemePreset>[
+    neon,
     lavender,
     ocean,
     mint,
@@ -211,6 +274,7 @@ abstract final class ThemePresets {
     monochrome,
   ];
 
+  /// The default look, also for an id this app does not know.
   static ThemePreset byId(String? id) =>
-      all.firstWhere((p) => p.id == id, orElse: () => lavender);
+      all.firstWhere((p) => p.id == id, orElse: () => neon);
 }

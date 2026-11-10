@@ -1,4 +1,5 @@
 import 'package:aria_admin/core/format.dart';
+import 'package:aria_admin/core/neon_theme.dart';
 import 'package:aria_admin/core/providers.dart';
 import 'package:aria_admin/data/admin_api.dart';
 import 'package:aria_admin/widgets/common.dart';
@@ -40,27 +41,32 @@ class OverviewPage extends ConsumerWidget {
             runSpacing: 12,
             children: [
               KpiCard(
+                tile: Neon.tiles[0],
                 label: 'Users',
                 value: count(v['users']),
                 hint: '+${count(v['signups_7d'])} this week',
               ),
               KpiCard(
+                tile: Neon.tiles[1],
                 label: 'Active (7 days)',
                 value: count(v['active_7d']),
                 hint: '${count(v['active_30d'])} in 30 days',
               ),
               KpiCard(
+                tile: Neon.tiles[2],
                 label: 'Paying Circles',
                 value: count(v['paid_circles']),
                 hint:
                     '${count(v['trials'])} on trial · ${count(v['granted'])} granted',
               ),
               KpiCard(
+                tile: Neon.tiles[3],
                 label: 'MRR (gross)',
                 value: rupees(v['mrr_inr']),
                 hint: 'monthly equivalent of paid plans',
               ),
               KpiCard(
+                tile: Neon.tiles[4],
                 label: 'Revenue this month',
                 value: rupees(v['revenue_this_month_inr']),
               ),

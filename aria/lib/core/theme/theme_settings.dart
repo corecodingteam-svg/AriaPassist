@@ -18,7 +18,7 @@ enum FontSizeOption {
 class ThemeSettings {
   const ThemeSettings({
     this.mode = ThemeMode.system,
-    this.presetId = 'lavender',
+    this.presetId = 'neon',
     this.fontSize = FontSizeOption.m,
     this.highContrast = false,
     this.reduceMotion = false,
@@ -27,7 +27,7 @@ class ThemeSettings {
 
   factory ThemeSettings.fromJson(Map<String, dynamic> json) => ThemeSettings(
     mode: ThemeMode.values.asNameMap()[json['mode']] ?? ThemeMode.system,
-    presetId: json['preset'] as String? ?? 'lavender',
+    presetId: json['preset'] as String? ?? 'neon',
     fontSize:
         FontSizeOption.values.asNameMap()[json['font_size']] ??
         FontSizeOption.m,

@@ -176,7 +176,7 @@ final downgradeGuardProvider = Provider<void>((ref) {
     if (!plan.themeAllowed(theme.presetId)) {
       ref
           .read(themeControllerProvider.notifier)
-          .setPreset(ThemePresets.lavender.id);
+          .setPreset(ThemePresets.neon.id);
     }
     if (!plan.has(Feature.customAccent) &&
         ref.read(themeControllerProvider).customAccent != null) {

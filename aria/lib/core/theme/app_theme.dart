@@ -5,7 +5,8 @@ import 'package:aria/core/theme/theme_settings.dart';
 import 'package:aria/core/utils/contrast.dart';
 import 'package:flutter/material.dart';
 
-const kFontFamily = 'PlusJakartaSans';
+/// The Neon look's typeface (assets/fonts/NotoSans-*.ttf); Devanagari falls back to Noto Sans Devanagari.
+const kFontFamily = 'NotoSans';
 const kFontFallback = ['NotoSansDevanagari'];
 
 abstract final class AppTheme {
@@ -103,6 +104,8 @@ abstract final class AppTheme {
     final shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AriaTokens.radiusMd),
     );
+    // Neon's panels: flat, with a thin border instead of a shadow.
+    final hairline = BorderSide(color: p.muted.withValues(alpha: 0.22));
     const minButton = Size(AriaTokens.minTap, AriaTokens.minTap);
 
     return base.copyWith(
@@ -113,12 +116,15 @@ abstract final class AppTheme {
         titleLarge: text.titleLarge?.copyWith(fontWeight: FontWeight.w700),
         titleMedium: text.titleMedium?.copyWith(fontWeight: FontWeight.w600),
       ),
+      // Neon's page header: a white bar with a thin rule under it. (The skin's navigation colour is the bottom bar;
+      // a dark header would hide the title-bar text buttons, which use the primary colour.)
       appBarTheme: AppBarTheme(
-        backgroundColor: p.background,
+        backgroundColor: p.surface,
         foregroundColor: p.text,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
+        shape: Border(bottom: hairline),
         titleTextStyle: text.titleLarge?.copyWith(fontWeight: FontWeight.w700),
       ),
       cardTheme: CardThemeData(
@@ -127,6 +133,21 @@ abstract final class AppTheme {
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AriaTokens.radiusLg),
+          side: hairline,
+        ),
+      ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: p.surface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AriaTokens.radiusLg),
+        ),
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: p.surface,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(AriaTokens.radiusLg),
+          ),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
@@ -164,7 +185,10 @@ abstract final class AppTheme {
         ),
       ),
       chipTheme: base.chipTheme.copyWith(
-        shape: const StadiumBorder(),
+        // Neon's labels: squared, not pills.
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AriaTokens.radiusSm),
+        ),
         side: BorderSide(color: p.muted.withValues(alpha: 0.3)),
         backgroundColor: p.surface,
         selectedColor: p.primary.withValues(alpha: 0.15),

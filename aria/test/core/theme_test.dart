@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:aria/core/theme/app_theme.dart';
@@ -51,6 +52,9 @@ void main() {
           aa(p.onSuccess, p.success, 'on success');
           aa(p.onWarning, p.warning, 'on warning');
           aa(p.onDanger, p.danger, 'on danger');
+          // The Neon bottom bar.
+          aa(p.onNav, p.navColor, 'selected tab on the bottom bar');
+          aa(p.navMuted, p.navColor, 'unselected tab on the bottom bar');
           final scheme = AppTheme.build(
             ThemeSettings(
               presetId: preset.id,
@@ -77,7 +81,7 @@ void main() {
     );
     expect(
       AppTheme.resolvePalette(bad, Brightness.light).primary,
-      ThemePresets.lavender.light.primary,
+      ThemePresets.neon.light.primary,
       reason: 'inaccessible accent falls back to the preset',
     );
   });
@@ -95,8 +99,9 @@ void main() {
     expect(ThemeSettings.fromJson(const {}), const ThemeSettings());
   });
 
-  test('unknown preset id falls back to Lavender', () {
-    expect(ThemePresets.byId('nope').id, 'lavender');
+  test('Neon is the default look, also for an unknown preset id', () {
+    expect(const ThemeSettings().presetId, 'neon');
+    expect(ThemePresets.byId('nope').id, 'neon');
   });
 
   test('reduce motion zeroes the motion token', () {
@@ -110,10 +115,40 @@ void main() {
   });
 
   test('preset ids match the Supabase theme_presets seed', () {
-    final sql = File('supabase/migrations/20261108000003_catalogue_data.sql')
-        .readAsStringSync();
+    final sql = [
+      for (final f in Directory('supabase/migrations').listSync())
+        if (f is File && f.path.endsWith('.sql')) f.readAsStringSync(),
+    ].join('\n');
     for (final p in ThemePresets.all) {
       expect(sql, contains("('${p.id}', '${p.label}'"), reason: p.id);
+    }
+  });
+
+  test('preset colours match the Neon theme migration', () {
+    final sql = File('supabase/migrations/20261118000001_neon_theme.sql')
+        .readAsStringSync();
+    String hex(Color c) =>
+        '#${(c.toARGB32() & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
+    for (final p in ThemePresets.all) {
+      final row = RegExp("\\('${p.id}', '[^']*', '([^']*)'").firstMatch(sql);
+      expect(row, isNotNull, reason: p.id);
+      final tokens = jsonDecode(row!.group(1)!) as Map<String, dynamic>;
+      for (final (mode, palette) in [('light', p.light), ('dark', p.dark)]) {
+        final t = tokens[mode] as Map<String, dynamic>;
+        expect(
+          {
+            'primary': hex(palette.primary),
+            'secondary': hex(palette.secondary),
+            'background': hex(palette.background),
+            'surface': hex(palette.surface),
+            'text': hex(palette.text),
+            'muted': hex(palette.muted),
+            'nav': hex(palette.navColor),
+          },
+          t,
+          reason: '${p.id} $mode',
+        );
+      }
     }
   });
 }

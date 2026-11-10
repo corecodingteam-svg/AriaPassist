@@ -247,7 +247,7 @@ void main() {
     await setPlan(app.db, kTestCircle, 'free'); // plan expired → synced
     await t.pumpAndSettle();
     expect(app.container.read(voiceSettingsProvider).voiceId, 'aria');
-    expect(app.container.read(themeControllerProvider).presetId, 'lavender');
+    expect(app.container.read(themeControllerProvider).presetId, 'neon');
     expect(
       await app.container.read(listsRepositoryProvider)!.count(),
       1,

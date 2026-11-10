@@ -60,6 +60,7 @@ class KpiCard extends StatelessWidget {
     required this.value,
     this.hint,
     this.tone,
+    this.tile,
     super.key,
   });
   final String label;
@@ -67,13 +68,22 @@ class KpiCard extends StatelessWidget {
   final String? hint;
   final Color? tone;
 
+  /// Draw it as a Neon stat tile in this colour (white text); a plain panel when null.
+  final Color? tile;
+
   @override
   Widget build(BuildContext context) {
+    final tile = this.tile;
     final s = Theme.of(context).colorScheme;
     final t = Theme.of(context).textTheme;
+    final ink = tile == null ? null : Colors.white;
     return SizedBox(
       width: 220,
       child: Card(
+        color: tile,
+        shape: tile == null
+            ? null
+            : RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -81,20 +91,20 @@ class KpiCard extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: t.labelLarge?.copyWith(color: s.onSurfaceVariant),
+                style: t.labelLarge?.copyWith(color: ink ?? s.onSurfaceVariant),
               ),
               const SizedBox(height: 6),
               Text(
                 value,
                 style: t.headlineMedium?.copyWith(
                   fontWeight: FontWeight.w700,
-                  color: tone,
+                  color: ink ?? tone,
                 ),
               ),
               if (hint != null)
                 Text(
                   hint!,
-                  style: t.bodySmall?.copyWith(color: s.onSurfaceVariant),
+                  style: t.bodySmall?.copyWith(color: ink ?? s.onSurfaceVariant),
                 ),
             ],
           ),

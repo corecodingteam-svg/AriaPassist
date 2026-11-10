@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:aria_admin/core/neon_theme.dart';
 import 'package:aria_admin/core/providers.dart';
 import 'package:aria_admin/data/admin_api.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,15 @@ class AdminShell extends ConsumerWidget {
       return Scaffold(
         appBar: header,
         drawer: Drawer(
-          child: ListView(
+          // Neon's sidebar: grey links, the open page in white on a lighter band.
+          child: ListTileTheme(
+            textColor: Neon.sidebarText,
+            iconColor: Neon.sidebarText,
+            selectedColor: Colors.white,
+            selectedTileColor: Theme.of(context).brightness == Brightness.dark
+                ? Neon.darkSidebarActive
+                : Neon.sidebarActive,
+            child: ListView(
             children: [
               for (final (i, d) in dests.indexed)
                 ListTile(
@@ -116,6 +125,7 @@ class AdminShell extends ConsumerWidget {
                   },
                 ),
             ],
+          ),
           ),
         ),
         body: child,
@@ -140,7 +150,6 @@ class AdminShell extends ConsumerWidget {
                 ),
             ],
           ),
-          const VerticalDivider(width: 1),
           Expanded(child: child),
         ],
       ),
