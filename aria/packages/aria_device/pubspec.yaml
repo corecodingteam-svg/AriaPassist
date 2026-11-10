@@ -1,0 +1,21 @@
+name: aria_device
+description: Device capabilities Aria needs from background isolates (ringer mode, native TTS on Android).
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.13.5
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.aria.device
+        pluginClass: AriaDevicePlugin
+      ios:
+        pluginClass: AriaDevicePlugin

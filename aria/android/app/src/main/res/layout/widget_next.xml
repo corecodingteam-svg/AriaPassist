@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/widget_bg" android:orientation="horizontal"
+    android:gravity="center_vertical" android:padding="16dp">
+    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+        android:layout_weight="1" android:orientation="vertical">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Next" android:textColor="#FF6E6487" android:textSize="12sp" />
+        <TextView android:id="@+id/next_title" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:maxLines="2" android:ellipsize="end"
+            android:textColor="#FF1F1633" android:textSize="16sp" android:textStyle="bold" />
+        <TextView android:id="@+id/next_time" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textColor="#FF7C4DFF" android:textSize="14sp" />
+    </LinearLayout>
+    <ImageView android:id="@+id/widget_mic" android:layout_width="48dp" android:layout_height="48dp"
+        android:background="@drawable/widget_mic_bg" android:padding="12dp"
+        android:src="@drawable/ic_mic" android:contentDescription="Talk to Aria" />
+</LinearLayout>

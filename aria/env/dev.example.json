@@ -1,0 +1,6 @@
+{
+  "SUPABASE_URL": "http://127.0.0.1:54721",
+  "SUPABASE_PUBLISHABLE_KEY": "<run `supabase status` and paste the Publishable key>",
+  "ENABLE_GOOGLE_SIGN_IN": "false",
+  "ENABLE_APPLE_SIGN_IN": "false"
+}
