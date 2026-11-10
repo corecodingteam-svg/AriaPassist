@@ -91,6 +91,8 @@ class KpiCard extends StatelessWidget {
             children: [
               Text(
                 label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: t.labelLarge?.copyWith(color: ink ?? s.onSurfaceVariant),
               ),
               const SizedBox(height: 6),
@@ -101,11 +103,24 @@ class KpiCard extends StatelessWidget {
                   color: ink ?? tone,
                 ),
               ),
-              if (hint != null)
-                Text(
-                  hint!,
-                  style: t.bodySmall?.copyWith(color: ink ?? s.onSurfaceVariant),
-                ),
+              // Always two lines for the hint (blank if there is none), so the cards in a row are the same height.
+              Stack(
+                children: [
+                  ExcludeSemantics(
+                    child: Opacity(
+                      opacity: 0,
+                      child: Text(' \n ', style: t.bodySmall),
+                    ),
+                  ),
+                  if (hint != null)
+                    Text(
+                      hint!,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: t.bodySmall?.copyWith(color: ink ?? s.onSurfaceVariant),
+                    ),
+                ],
+              ),
             ],
           ),
         ),
